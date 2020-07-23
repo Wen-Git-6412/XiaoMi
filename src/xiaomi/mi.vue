@@ -4,11 +4,10 @@
       <el-header>
         <div class="box">
           <div>Sort by:</div>
-          <div>
+          <div @click="changeSort">
             <p @click="logout">price</p>
-            <span>
-              <i class="el-icon-caret-top"></i>
-            </span>
+            <i class="el-icon-caret-top"></i>
+            <i class="el-icon-caret-bottom"></i>
           </div>
         </div>
       </el-header>
@@ -55,7 +54,7 @@ export default {
   },
   props: {},
   computed: {
-        //商品搜索信息
+    //商品搜索信息
     searchGoods() {
       let goods = this.list;
       //sort排序
@@ -67,8 +66,9 @@ export default {
         }
       });
 
-      if (this.activePrice != 0) {
-        let price = this.priceAll[this.activePrice];
+      if (this.actived != 0) {
+        let price = this.list[this.actived].productName;
+        console.log(price)
         let min = price.split("-")[0];
         let max = price.split("-")[1];
 
@@ -85,13 +85,14 @@ export default {
     this.goods();
   },
   methods: {
-    //   changeSort() {
-    //   if (this.sort == 0 || this.sort == 2) {
-    //     this.sort = 1;
-    //   } else {
-    //     this.sort = 2;
-    //   }
-    // },
+      changeSort() {
+      if (this.sort == 0 || this.sort == 2) {
+        this.sort = 1;
+      } else {
+        this.sort = 2;
+      }
+      console.log(changeSort())
+    },
     goods() {
       this.$axios.get("../static/data.json").then(res => {
         // console.log(res);
