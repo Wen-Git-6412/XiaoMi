@@ -68,16 +68,17 @@ export default {
 
       if (this.actived != 0) {
         let price = this.list[this.actived].productName;
-        console.log(price)
+        // console.log(price)
         let min = price.split("-")[0];
         let max = price.split("-")[1];
-
+        console.log(min)
         goods = goods.filter(item => {
           return item.salePrice >= min && item.salePrice < max;
         });
       }
 
       return goods;
+      // console.log(goods)
     }
   },
   components: {},
@@ -85,13 +86,13 @@ export default {
     this.goods();
   },
   methods: {
-      changeSort() {
+    changeSort() {
       if (this.sort == 0 || this.sort == 2) {
         this.sort = 1;
       } else {
         this.sort = 2;
       }
-      console.log(changeSort())
+      console.log(changeSort());
     },
     goods() {
       this.$axios.get("../static/data.json").then(res => {
@@ -102,6 +103,7 @@ export default {
     },
     logout() {
       this.$store.commit("logout");
+      // console.log(logout)
     }
   }
 };
